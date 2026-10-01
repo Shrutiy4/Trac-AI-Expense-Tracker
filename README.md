@@ -1,6 +1,6 @@
 # Trac — AI Expense Tracker
 
-Trac is a full-stack expense management application that helps users track spending, manage expenses, monitor budgets, analyze spending patterns, and receive AI-powered financial suggestions.
+Trac is a full-stack AI-powered expense management platform designed to simplify personal finance tracking. It combines expense management, budgeting, analytics, receipt OCR, group expenses, and AI-generated spending insights in a single application.
 
 ## Features
 
@@ -15,8 +15,8 @@ Trac is a full-stack expense management application that helps users track spend
 
   * Add, edit, view, and delete expenses
   * Categorize expenses
-  * View expense history and details
-  * Search and manage personal expenses
+  * Search and manage expense history
+  * Support for multiple currencies
 
 * **Dashboard**
 
@@ -34,32 +34,44 @@ Trac is a full-stack expense management application that helps users track spend
 
 * **Budget Management**
 
-  * Set spending budgets
+  * Create weekly and monthly budgets
   * Track spending against budgets
   * Monitor budget progress
-  * Budget-related notifications and warnings
+  * Budget warnings and notifications
 
 * **AI-Powered Insights**
 
-  * Analyzes recent expense data
+  * Analyzes recent spending data
   * Generates personalized spending suggestions
   * Uses OpenRouter with Mistral 7B Instruct
-  * Provides concise recommendations based on spending patterns
+  * Provides recommendations based on spending patterns
 
 * **Receipt OCR**
 
   * Upload expense receipts
-  * Extract information from receipts automatically
+  * Automatically extract receipt information
   * Uses the Mindee Expense Receipt API
   * Reduces manual expense entry
 
-* **Multi-Currency Support**
-
-  * Supports displaying expenses using the selected currency
-
 * **Group Expenses**
 
-  * Supports managing expenses associated with groups
+  * Manage expenses associated with groups
+  * Support for shared expense management
+
+---
+
+## Key Highlights
+
+* Full-stack React and Node.js architecture
+* REST API-based frontend/backend communication
+* JWT authentication and protected APIs
+* MongoDB and Mongoose for persistent data storage
+* AI-powered spending analysis
+* Automated receipt information extraction
+* Interactive financial analytics
+* Weekly and monthly budget tracking
+* Multi-currency expense management
+* External API integration for AI and OCR services
 
 ---
 
@@ -67,7 +79,7 @@ Trac is a full-stack expense management application that helps users track spend
 
 ### Frontend
 
-* React
+* React 19
 * Vite
 * React Router
 * Tailwind CSS
@@ -86,11 +98,11 @@ Trac is a full-stack expense management application that helps users track spend
 * Mongoose
 * JWT
 * bcryptjs
-* Axios
 * Multer
+* Axios
 * dotenv
 
-### AI & External APIs
+### AI & External Services
 
 * OpenRouter
 * Mistral 7B Instruct
@@ -129,13 +141,13 @@ Trac is a full-stack expense management application that helps users track spend
                                │
                     ┌──────────┴──────────┐
                     ▼                     ▼
-             ┌─────────────┐      ┌─────────────┐
-             │   MongoDB   │      │ External APIs│
-             │             │      │             │
-             │ Users       │      │ OpenRouter  │
-             │ Expenses    │      │ Mindee OCR  │
-             │ Categories  │      │             │
-             │ Groups      │      └─────────────┘
+             ┌─────────────┐      ┌──────────────┐
+             │   MongoDB   │      │External APIs │
+             │             │      │              │
+             │ Users       │      │ OpenRouter   │
+             │ Expenses    │      │ Mindee OCR   │
+             │ Categories  │      │              │
+             │ Groups      │      └──────────────┘
              └─────────────┘
 ```
 
@@ -149,40 +161,10 @@ Trac-AI-Expense-Tracker/
 ├── backend/
 │   ├── src/
 │   │   ├── config/
-│   │   │   └── db.js
-│   │   │
 │   │   ├── controllers/
-│   │   │   ├── aiController.js
-│   │   │   ├── analyticsController.js
-│   │   │   ├── authController.js
-│   │   │   ├── dashboardController.js
-│   │   │   ├── expenseController.js
-│   │   │   ├── metaController.js
-│   │   │   ├── ocrController.js
-│   │   │   ├── reportController.js
-│   │   │   └── userSettingsController.js
-│   │   │
 │   │   ├── middleware/
-│   │   │   ├── authMiddleware.js
-│   │   │   └── errorHandler.js
-│   │   │
 │   │   ├── models/
-│   │   │   ├── Category.js
-│   │   │   ├── Expense.js
-│   │   │   ├── Group.js
-│   │   │   └── User.js
-│   │   │
 │   │   ├── routes/
-│   │   │   ├── aiRoutes.js
-│   │   │   ├── analyticsRoutes.js
-│   │   │   ├── authRoutes.js
-│   │   │   ├── dashboardRoutes.js
-│   │   │   ├── expenseRoutes.js
-│   │   │   ├── metaRoutes.js
-│   │   │   ├── ocrRoutes.js
-│   │   │   ├── reportRoutes.js
-│   │   │   └── userSettingsRoutes.js
-│   │   │
 │   │   └── server.js
 │   │
 │   └── package.json
@@ -201,16 +183,15 @@ Trac-AI-Expense-Tracker/
 │   └── package.json
 │
 ├── .gitignore
-└── package.json
+├── package.json
+└── README.md
 ```
 
 ---
 
 ## AI-Powered Spending Suggestions
 
-Trac includes an AI-powered spending analysis feature.
-
-The application takes recent expense data and sends it to an OpenRouter-hosted language model. The model analyzes the spending patterns and generates specific suggestions for saving money.
+Trac uses AI to convert raw spending data into personalized financial suggestions.
 
 ### AI Workflow
 
@@ -221,30 +202,31 @@ User Expenses
 Recent Expense Data
       │
       ▼
-AI Prompt Generation
+Prompt Generation
       │
       ▼
-OpenRouter API
+Backend AI Service
+      │
+      ▼
+OpenRouter
       │
       ▼
 Mistral 7B Instruct
       │
       ▼
-Personalized Suggestions
+Spending Suggestions
       │
       ▼
 Trac Dashboard
 ```
 
-The AI service is configured to generate a small number of concise recommendations based on the user's recent spending data.
+The application analyzes recent expense information and generates concise recommendations based on observed spending patterns.
 
 ---
 
 ## Receipt OCR
 
-Trac supports automatic receipt processing.
-
-Users can upload a receipt, which is processed by the backend and sent to the Mindee Expense Receipt API for extraction.
+Trac reduces manual expense entry through receipt processing.
 
 ### OCR Workflow
 
@@ -258,22 +240,22 @@ Frontend Upload
 Express + Multer
       │
       ▼
-Mindee Expense Receipt API
+Mindee OCR API
       │
       ▼
-Extracted Receipt Data
+Extracted Receipt Information
       │
       ▼
 Expense Workflow
 ```
 
-This feature helps reduce the amount of manual information users need to enter when recording expenses.
+The OCR integration allows relevant information to be extracted from uploaded receipts before being used in the expense workflow.
 
 ---
 
 ## Analytics
 
-Trac provides multiple ways to analyze spending data, including:
+Trac provides multiple views of financial activity:
 
 * Category-wise spending
 * Daily spending trends
@@ -281,7 +263,7 @@ Trac provides multiple ways to analyze spending data, including:
 * Spending summaries
 * Interactive charts
 
-The frontend uses chart components to visualize financial data and make spending patterns easier to understand.
+The frontend uses Recharts to visualize financial information and make spending patterns easier to identify.
 
 ---
 
@@ -294,22 +276,24 @@ Security-related functionality includes:
 * JWT authentication
 * Password hashing using bcrypt
 * Protected API routes
-* User-specific expense access
-* Environment variables for sensitive credentials
+* User-specific data access
 * Authentication middleware
+* Environment variables for sensitive credentials
+* Backend-controlled external API integrations
+
+Sensitive credentials such as database passwords and API keys should never be committed to the repository.
 
 ---
 
 ## API Modules
 
-The backend is organized into separate route and controller modules.
-
 | Module         | Purpose                                  |
 | -------------- | ---------------------------------------- |
-| Authentication | User registration and login              |
+| Authentication | Registration and login                   |
 | Expenses       | Create, read, update and delete expenses |
 | Dashboard      | Spending summaries and dashboard data    |
 | Analytics      | Spending analysis and statistics         |
+| Budgets        | Budget creation and tracking             |
 | AI             | AI-generated spending suggestions        |
 | OCR            | Receipt processing                       |
 | Reports        | Expense reporting                        |
@@ -319,37 +303,132 @@ The backend is organized into separate route and controller modules.
 
 ---
 
+## API Overview
+
+The backend exposes REST APIs for the main application modules.
+
+| Endpoint             | Method | Purpose                        |
+| -------------------- | ------ | ------------------------------ |
+| `/api/auth/register` | POST   | Register a new user            |
+| `/api/auth/login`    | POST   | Authenticate a user            |
+| `/api/expenses`      | GET    | Retrieve expenses              |
+| `/api/expenses`      | POST   | Create an expense              |
+| `/api/expenses/:id`  | PUT    | Update an expense              |
+| `/api/expenses/:id`  | DELETE | Delete an expense              |
+| `/api/analytics/*`   | GET    | Retrieve analytics data        |
+| `/api/dashboard/*`   | GET    | Retrieve dashboard information |
+| `/api/ai/*`          | POST   | Generate AI spending insights  |
+| `/api/ocr/*`         | POST   | Process receipt information    |
+
+All user-specific endpoints require authentication.
+
+---
+
+## Development Architecture
+
+The project separates frontend responsibilities from backend business logic.
+
+### Frontend
+
+Responsible for:
+
+* User interface
+* Routing
+* Form handling
+* Data visualization
+* API communication
+* User interaction
+
+### Backend
+
+Responsible for:
+
+* Authentication
+* Authorization
+* Business logic
+* Database operations
+* Expense management
+* Analytics
+* AI integration
+* OCR integration
+* API responses
+
+### Database
+
+MongoDB stores application data including:
+
+* Users
+* Expenses
+* Categories
+* Groups
+* User settings
+
+### External Services
+
+The backend communicates with external services for:
+
+* AI-powered spending analysis
+* Receipt OCR
+
+---
+
+## Challenges & Solutions
+
+### Reducing Manual Expense Entry
+
+Manually entering information from receipts can be time-consuming.
+
+**Solution:** Integrated receipt OCR so that information can be extracted from uploaded receipts and incorporated into the expense workflow.
+
+### Converting Raw Expenses into Insights
+
+Simply storing transactions does not provide meaningful financial insight.
+
+**Solution:** Added daily, monthly, and category-based analytics along with AI-generated spending suggestions.
+
+### Protecting Financial Data
+
+Financial information requires controlled access between users.
+
+**Solution:** Implemented JWT authentication, password hashing, protected routes, and user-specific data access.
+
+### Integrating External Services Securely
+
+AI and OCR services require external API credentials.
+
+**Solution:** External service communication is handled by the backend, keeping sensitive API credentials away from the frontend.
+
+---
+
 ## Getting Started
 
 ### Prerequisites
 
-Make sure you have installed:
+Make sure you have:
 
 * Node.js
 * npm
-* MongoDB or a MongoDB Atlas database
+* MongoDB or MongoDB Atlas
 
 ---
 
 ## Installation
 
-### 1. Clone the repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Shrutiy4/Trac-AI-Expense-Tracker.git
 cd Trac-AI-Expense-Tracker
 ```
 
-### 2. Install backend dependencies
+### 2. Install Backend Dependencies
 
 ```bash
 cd backend
 npm install
 ```
 
-### 3. Install frontend dependencies
-
-Open another terminal or return to the project root:
+### 3. Install Frontend Dependencies
 
 ```bash
 cd ../frontend
@@ -372,7 +451,7 @@ OPENROUTER_API_KEY=your_openrouter_api_key
 MINDEE_API_KEY=your_mindee_api_key
 ```
 
-Use your own credentials for each service.
+Replace the placeholder values with your own credentials.
 
 **Never commit real API keys, database credentials, or secrets to GitHub.**
 
@@ -388,7 +467,7 @@ From the `backend` directory:
 npm run dev
 ```
 
-The backend can also be started in production mode with:
+For production:
 
 ```bash
 npm start
@@ -402,13 +481,13 @@ From the `frontend` directory:
 npm run dev
 ```
 
-Vite will provide the local development URL in the terminal.
+Vite will display the local development URL in the terminal.
 
 ---
 
 ## Production Build
 
-To create a production build of the frontend:
+To create a production build:
 
 ```bash
 npm run build
@@ -416,26 +495,17 @@ npm run build
 
 ---
 
-## Future Improvements
+## Roadmap
 
-Potential extensions for Trac include:
-
-* Bank account integration
-* Automatic transaction synchronization
-* CSV transaction import
-* Automated expense categorization
-* Recurring expense detection
-* Spending anomaly detection
-* Financial forecasting
-* Advanced AI-based financial analysis
-* Mobile application
-* Automated financial reports
-
----
-
-## License
-
-This project is licensed under the ISC License.
+* [ ] Bank account / Account Aggregator integration
+* [ ] CSV transaction import
+* [ ] Automatic transaction categorization
+* [ ] Recurring expense detection
+* [ ] Spending anomaly detection
+* [ ] Financial forecasting
+* [ ] Advanced AI financial analysis
+* [ ] Mobile application
+* [ ] Automated financial reports
 
 ---
 
@@ -443,5 +513,10 @@ This project is licensed under the ISC License.
 
 **Shruti**
 
-GitHub: [@Shrutiy4](https://github.com/Shrutiy4)
+GitHub: **@Shrutiy4**
 
+---
+
+## Acknowledgments
+
+This project is based on an existing open-source expense tracker codebase and has been independently maintained and documented in this repository.
