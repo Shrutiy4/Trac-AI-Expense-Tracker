@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./tracs_logo.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="./tracs_logo.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./tracs_logo.png" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/tracs_logo.png" />
+
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Trac$" />
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trac$ - AI Expense Tracker</title>
+    <script>
+      const savedTheme = localStorage.getItem("theme") || "autumn";
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    </script>
+
+  </head>
+  <body>
+    <div id="root" className="transition-colors duration-300 bg-base-200 text-base-content"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "Trac$ - AI Expense Tracker",
+  "short_name": "Trac$",
+  "description": "Track and analyze your expenses with AI-powered insights.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/tracs.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/tracs.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/tracs.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
