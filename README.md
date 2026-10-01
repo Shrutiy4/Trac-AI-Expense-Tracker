@@ -514,9 +514,3 @@ npm run build
 **Shruti**
 
 GitHub: **@Shrutiy4**
-
----
-
-## Acknowledgments
-
-This project is based on an existing open-source expense tracker codebase and has been independently maintained and documented in this repository.
